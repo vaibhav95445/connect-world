@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wallet - Connect World</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Optional: style the back button */
+    .back-btn {
+      margin-bottom: 20px;
+      padding: 8px 15px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+
+  <h1>My Wallet</h1>
+  <p>Balance: <span id="walletBalance">0</span> USDT (BEP20)</p>
+
+  <input type="number" id="amount" placeholder="Enter amount" />
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+  <button onclick="transfer()">Transfer</button>
+
+  <script>
+    // -------------------------
+    // BACK BUTTON
+    // -------------------------
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+
+    // -------------------------
+    // WALLET FUNCTIONS
+    // -------------------------
+    let balance = 0;
+    const walletBalance = document.getElementById("walletBalance");
+
+    function updateBalance() {
+      walletBalance.textContent = balance.toFixed(2);
+    }
+
+    function deposit() {
+      const amt = parseFloat(document.getElementById("amount").value);
+      if (!amt || amt <= 0) return alert("Enter valid amount");
+      balance += amt;
+      updateBalance();
+      alert(`Deposited ${amt} USDT`);
+    }
+
+    function withdraw() {
+      const amt = parseFloat(document.getElementById("amount").value);
+      if (!amt || amt <= 0) return alert("Enter valid amount");
+      if (amt > balance) return alert("Insufficient balance");
+      balance -= amt;
+      updateBalance();
+      alert(`Withdrawn ${amt} USDT`);
+    }
+
+    function transfer() {
+      const amt = parseFloat(document.getElementById("amount").value);
+      if (!amt || amt <= 0) return alert("Enter valid amount");
+      if (amt > balance) return alert("Insufficient balance");
+      const toUser = prompt("Enter recipient username:");
+      if (!toUser) return;
+      balance -= amt;
+      updateBalance();
+      alert(`Transferred ${amt} USDT to ${toUser}`);
+    }
+
+    updateBalance();
+  </script>
+</body>
+</html>

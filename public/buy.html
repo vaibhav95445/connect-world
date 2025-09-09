@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Service - Connect World</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-box {
+      background: #222;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none; /* hidden initially */
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #00f7ff;
+    }
+    .form-box input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 4px;
+      border: none;
+    }
+    .form-box button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      font-weight: bold;
+      cursor: pointer;
+      color: #000;
+    }
+    .back-btn {
+      margin-bottom: 20px;
+      padding: 8px 15px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+
+  <h1>Buy Forex Service</h1>
+  <div class="service-box">
+    <p>Service: Forex Copy Trade</p>
+    <p>Price: $99</p>
+    <button id="buyBtn">Buy Now</button>
+  </div>
+
+  <!-- Connect Forex Form -->
+  <div class="form-box" id="connectForm">
+    <h3>Connect Your Forex Account</h3>
+    <input type="text" id="brokerName" placeholder="Broker Name" required>
+    <input type="text" id="brokerServer" placeholder="Broker Server" required>
+    <input type="text" id="accountNumber" placeholder="Account Number" required>
+    <input type="password" id="accountPassword" placeholder="Password" required>
+    <button onclick="connectForex()">Connect</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+
+    const buyBtn = document.getElementById("buyBtn");
+    const connectForm = document.getElementById("connectForm");
+
+    buyBtn.addEventListener("click", () => {
+      alert("Payment successful! You have purchased Forex Copy Trade for $99.");
+      // Show the connect form after successful payment
+      connectForm.style.display = "block";
+      connectForm.scrollIntoView({ behavior: "smooth" });
+    });
+
+    function connectForex() {
+      const broker = document.getElementById("brokerName").value.trim();
+      const server = document.getElementById("brokerServer").value.trim();
+      const accNum = document.getElementById("accountNumber").value.trim();
+      const accPass = document.getElementById("accountPassword").value.trim();
+
+      if (!broker || !server || !accNum || !accPass) {
+        return alert("⚠️ All fields are required!");
+      }
+
+      // Simulate connection (for demo)
+      const success = Math.random() > 0.3; // 70% chance
+      if (success) {
+        alert(`✅ Connected successfully to ${broker} (${accNum})`);
+      } else {
+        alert(`❌ Connection failed. Please check your credentials and try again.`);
+      }
+    }
+  </script>
+</body>
+</html>

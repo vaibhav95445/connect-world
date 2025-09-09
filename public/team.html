@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Team - Connect World</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back button styling */
+    .back-btn {
+      margin-bottom: 20px;
+      padding: 8px 15px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+
+  <h1>My Team</h1>
+  <p>Team Structure (15 levels demo)</p>
+
+  <div id="teamContainer"></div>
+
+  <script>
+    // Back button function
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+
+    // Generate team
+    const levels = 15;
+    const teamContainer = document.getElementById("teamContainer");
+
+    function generateTeam(level) {
+      let html = "";
+      for (let i = 1; i <= level; i++) {
+        const members = Math.pow(2, i); // Example: 2^level members
+        const income = (members * 10).toFixed(2); // $10 per member
+        html += `<p>Level ${i}: ${members} members - Income: $${income}</p>`;
+      }
+      return html;
+    }
+
+    teamContainer.innerHTML = generateTeam(levels);
+  </script>
+</body>
+</html>

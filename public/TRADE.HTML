@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profit - Connect World</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+      color: #00f7ff;
+      background: #111;
+    }
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00f7ff;
+    }
+    .profit-box {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 20px;
+      min-width: 250px;
+    }
+    .profit-box p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    .back-btn {
+      margin-bottom: 20px;
+      padding: 8px 15px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back Button -->
+  <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+
+  <h1>My Forex Profit (XAU/USD)</h1>
+
+  <div class="profit-box">
+    <p>Today's Profit: <span id="todayProfit">0.00</span> USD</p>
+    <p>Total Profit: <span id="totalProfit">0.00</span> USD</p>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+
+    // Simulated data
+    const todayProfit = (Math.random() * 50 - 25).toFixed(2); // -25 to +25 USD
+    const totalProfit = (Math.random() * 500).toFixed(2); // 0 to 500 USD
+
+    document.getElementById("todayProfit").textContent = todayProfit;
+    document.getElementById("totalProfit").textContent = totalProfit;
+  </script>
+</body>
+</html>
