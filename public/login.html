@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connect World - Login</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Password wrapper */
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+      padding-right: 40px; /* space for the icon */
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .toggle-pass {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #00f7ff;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
   <h1 class="title">Connect World</h1>
@@ -12,7 +38,13 @@
   <div class="form-box">
     <form id="loginForm">
       <input type="text" id="loginUser" placeholder="Username or Email" required>
-      <input type="password" id="loginPass" placeholder="Password" required>
+
+      <!-- Password with toggle -->
+      <div class="password-wrapper">
+        <input type="password" id="loginPass" placeholder="Password" required>
+        <span class="toggle-pass" onclick="togglePassword('loginPass')">👁️</span>
+      </div>
+
       <button type="submit" class="btn">Login</button>
       
       <div class="forgot-password">
@@ -26,6 +58,13 @@
   </div>
 
   <script>
+    // Password toggle function
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    // Login form submit
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
@@ -52,11 +91,13 @@
       }
     });
 
+    // Signup redirect
     document.getElementById("goSignup").addEventListener("click", function(e) {
       e.preventDefault();
       window.location.href = "signup.html";
     });
 
+    // Forgot password
     document.getElementById("forgotPassLink").addEventListener("click", function(e) {
       e.preventDefault();
       const email = prompt("Please enter your registered email to reset password:");
