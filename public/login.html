@@ -7,31 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Page Title -->
   <h1 class="title">Connect World</h1>
   
-  <!-- Login Form -->
   <div class="form-box">
     <form id="loginForm">
       <input type="text" id="loginUser" placeholder="Username or Email" required>
       <input type="password" id="loginPass" placeholder="Password" required>
       <button type="submit" class="btn">Login</button>
       
-      <!-- Forgot Password -->
       <div class="forgot-password">
-        <a href="#" id="forgotPassLink">Forgot Password?</a>
+        <p><a href="#" id="forgotPassLink" style="color:#00f7ff;">Forgot Password?</a></p>
       </div>
     </form>
 
     <p class="switch-text">Don't have an account? 
-      <a href="#" id="goSignup">Sign Up</a>
+      <a href="signup.html" id="goSignup">Sign Up</a>
     </p>
   </div>
 
   <script>
-    // -------------------------
-    // LOGIN FORM SUBMIT
-    // -------------------------
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
@@ -42,17 +36,15 @@
         const res = await fetch("/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user, password }) // <-- must match backend field
+          body: JSON.stringify({ user, password })
         });
 
         const data = await res.json();
         alert(data.message);
 
         if (res.ok) {
-          // save username + referral in localStorage for dashboard
           localStorage.setItem("username", data.user?.username || user);
           localStorage.setItem("referral", data.user?.referral || "");
-
           window.location.href = "dashboard.html";
         }
       } catch (err) {
@@ -60,38 +52,19 @@
       }
     });
 
-    // -------------------------
-    // SIGNUP REDIRECT
-    // -------------------------
     document.getElementById("goSignup").addEventListener("click", function(e) {
       e.preventDefault();
       window.location.href = "signup.html";
     });
 
-    // -------------------------
-    // FORGOT PASSWORD
-    // -------------------------
     document.getElementById("forgotPassLink").addEventListener("click", function(e) {
       e.preventDefault();
-
       const email = prompt("Please enter your registered email to reset password:");
-
       if (!email) {
         alert("⚠️ Email is required!");
         return;
       }
-
-      // In real application, call backend API:
-      // fetch('/api/forgot-password', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email })
-      // })
-      // .then(res => res.json())
-      // .then(data => alert(data.message))
-      // .catch(err => alert("⚠️ Server error, try again!"));
-
-      alert(`A password reset link has been sent to ${email}.`); // temporary demo
+      alert(`A password reset link has been sent to ${email}.`);
     });
   </script>
 </body>

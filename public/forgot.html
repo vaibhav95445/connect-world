@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password - Connect World</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+    h2 {
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff;
+    }
+    form {
+      margin-top: 30px;
+      display: inline-block;
+      background: #111;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,247,255,0.4);
+    }
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      width: 250px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #00f7ff, #00bfff);
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔑 पासवर्ड भूल गए?</h2>
+  <p>अपना ईमेल दर्ज करें, हम आपको नया Temporary Password भेज देंगे।</p>
+
+  <form id="forgotForm">
+    <input type="email" id="email" placeholder="आपका ईमेल" required>
+    <button type="submit">भेजें</button>
+  </form>
+
+  <div class="message" id="message"></div>
+
+  <script>
+    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      const res = await fetch("/api/forgot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      document.getElementById("message").textContent = data.message;
+    });
+  </script>
+</body>
+</html>

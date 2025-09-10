@@ -4,27 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connect World - Signup</title>
-  <!-- CSS link -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Page Title -->
   <h1 class="title">Connect World</h1>
   
-  <!-- Signup Form -->
   <div class="form-box">
     <form id="signupForm">
       <input type="text" id="username" placeholder="Username" required>
       <input type="email" id="email" placeholder="Email" required>
-
       <input type="password" id="password" placeholder="Password" required>
       <input type="text" id="referralInput" placeholder="Referral Code">
 
       <button type="submit" class="btn">Sign Up</button>
 
-      <!-- Forgot Password -->
       <div class="forgot-password">
-        <a href="#" id="forgotPassLink">Forgot Password?</a>
+        <p><a href="#" id="forgotPassLink" style="color:#00f7ff;">Forgot Password?</a></p>
       </div>
     </form>
 
@@ -34,21 +29,18 @@
   </div>
 
   <script>
-    // Get referral from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const ref = urlParams.get("ref");
+    // Prefill referral code from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+    if (ref) document.getElementById("referralInput").value = ref;
 
-  if (ref) {
-    document.getElementById("referralInput").value = ref;
-  }
-    // Signup submit
     document.getElementById("signupForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      const referral = document.getElementById("referral").value.trim();
+      const referral = document.getElementById("referralInput").value.trim();
 
       try {
         const res = await fetch("/api/signup", {
@@ -61,41 +53,26 @@
         alert(data.message);
 
         if (res.ok) {
-          window.location.href = "login.html"; // redirect to login after signup
+          window.location.href = "login.html";
         }
       } catch (err) {
         alert("⚠️ Server error, please try again!");
       }
     });
 
-    // Handle "Login" click
     document.getElementById("goLogin").addEventListener("click", function(e) {
       e.preventDefault();
       window.location.href = "login.html";
     });
 
-    // Handle "Forgot Password" click
     document.getElementById("forgotPassLink").addEventListener("click", function(e) {
       e.preventDefault();
-
       const email = prompt("Please enter your registered email to reset password:");
-
       if (!email) {
         alert("⚠️ Email is required!");
         return;
       }
-
-      // Simulate sending reset link
       alert(`A password reset link has been sent to ${email}.`);
-
-      // In real application, call backend API:
-      // fetch('/api/forgot-password', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email })
-      // }).then(res => res.json())
-      //   .then(data => alert(data.message))
-      //   .catch(err => alert("⚠️ Server error, try again!"));
     });
   </script>
 </body>
