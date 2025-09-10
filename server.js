@@ -1,5 +1,6 @@
-const express = require("express");
 const path = require("path");
+
+const express = require("express");
 const fs = require("fs");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt"); // ✅ Import bcrypt
@@ -83,6 +84,11 @@ app.post("/api/login", async (req, res) => {
   
 
 });
+// Default route - load signup page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "signup.html"));
+});
+
 
 // ✅ Only app.listen here, no duplicate const PORT
 app.listen(PORT, () => {
