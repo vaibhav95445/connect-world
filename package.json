@@ -17,7 +17,7 @@
   "author": "vaibhav",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "express": "^4.18.2",
     "nodemailer": "^6.9.11"
   },

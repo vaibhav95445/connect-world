@@ -16,9 +16,10 @@
     <form id="signupForm">
       <input type="text" id="username" placeholder="Username" required>
       <input type="email" id="email" placeholder="Email" required>
-      <input type="text" id="referral" placeholder="Referral Code (optional)">
+
       <input type="password" id="password" placeholder="Password" required>
-      
+      <input type="text" id="referralInput" placeholder="Referral Code">
+
       <button type="submit" class="btn">Sign Up</button>
 
       <!-- Forgot Password -->
@@ -33,6 +34,13 @@
   </div>
 
   <script>
+    // Get referral from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const ref = urlParams.get("ref");
+
+  if (ref) {
+    document.getElementById("referralInput").value = ref;
+  }
     // Signup submit
     document.getElementById("signupForm").addEventListener("submit", async function(e) {
       e.preventDefault();
